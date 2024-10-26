@@ -19,6 +19,7 @@ function bytesformat($bytes, $precision = 2): string
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -432,7 +433,7 @@ let appsJson = {
                                                                 <span :class="subApp.best ? 'dark:text-gray-200 text-gray-800' : 'text-gray-600'" class="text-sm" x-text="subApp.name"></span>
                                                             </div>
                                                             <div class="flex justify-between items-center">
-                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer" x-show="appsJson[item][app].autoImport != ''" :data-tooltip-target="'tooltip-import-' + app" :href="appsJson[item][app].autoImport + '{{ user.subscription_url }}'" :data-title="app">
+                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer" x-show="appsJson[item][app].autoImport != ''" :data-tooltip-target="'tooltip-import-' + app" :href="appsJson[item][app].autoImport + '<?=$user['subscription_url']?>'" :data-title="app">
                                                                     <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stroke-blue-600 dark:hover:stroke-gray-300 hover:stroke-gray-800 transition-colors">
                                                                         <polyline id="primary" points="13 7 13 13 7 13" style="fill: none; "></polyline>
                                                                         <line id="primary-2" data-name="primary" x1="13" y1="13" x2="3" y2="3" style="fill: none; "></line>
