@@ -41,6 +41,17 @@ function bytesformat($bytes, $precision = 2): string
 
 let appsJson = {
             "IOS": {
+                "SingBox": {
+                    "url": [
+                        {
+                            "name": "IOS 15+",
+                            "url": "https://apps.apple.com/us/app/sing-box/id6451272673",
+                            "best": false,
+                        },
+                    ],
+                    "tutorial": "",
+                    "autoImport": "sing-box://import-remote-profile?url="
+                },
                 "Streisand": {
                     "url": [
                         {
@@ -49,7 +60,8 @@ let appsJson = {
                             "best": true
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": ".../marzban-tutorial/streisand.MP4",
+                    "autoImport": "streisand://install-config?url="
                 },
                 "FoXray": {
                     "url": [
@@ -59,7 +71,8 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": "../marzban-tutorial/foxray.mp4",
+                    "autoImport": "foxray://install-config?url="
                 },
                 "V2Box": {
                     "url": [
@@ -69,7 +82,8 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": "",
+                    "autoImport": "v2box://install-config?url="
                 },
                 "Shadowrocket": {
                     "url": [
@@ -79,10 +93,22 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": "../marzban-tutorial/v2box.MP4",
+                    "autoImport":""
                 }
             },
             "Android": {
+                "SingBox": {
+                    "url": [
+                        {
+                            "name": "",
+                            "url": "https://github.com/SagerNet/sing-box/releases/download/v1.9.0-rc.3/SFA-1.9.0-rc.3-universal.apk",
+                            "best": true,
+                        }
+                    ],
+                    "tutorial": "",
+                    "autoImport": "sing-box://import-remote-profile?url="
+                },
                 "v2rayNG": {
                     "url": [
                         {
@@ -96,7 +122,8 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": "../marzban-tutorial/v2rayNG.mp4",
+                    "autoImport": "v2rayng://install-config?url="
                 },
                 "NekoBox": {
                     "url": [
@@ -123,7 +150,7 @@ let appsJson = {
                             "best": true
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": "../marzban-tutorial/nekoray.MP4"
                 },
                 "v2rayN": {
                     "url": [
@@ -133,7 +160,7 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": "../marzban-tutorial/v2rayN.MP4"
                 }
             }
         };
@@ -161,7 +188,10 @@ let appsJson = {
                 "copyAll": "Copy All",
                 "proxy": "Proxy",
                 "tutorial": "Tutorial",
-                "download": "Download"
+                "download": "Download",
+                "support": "Telegram Support",
+                "import": "Import to app",
+                "autoImport": "Auto Import",
             },
             "fa": {
                 "active": "فعال",
@@ -186,7 +216,10 @@ let appsJson = {
                 "copyAll": "کپی همه",
                 "proxy": "پروکسی",
                 "tutorial": "آموزش",
-                "download": "دانلود"
+                "download": "دانلود",
+                "support": "پشتیبانی تلگرام",
+                "import": "افزودن به نرم افزار",
+                "autoImport": "افزودن خودکار"
             },
             "ru": {
                 "active": "активный",
@@ -211,7 +244,10 @@ let appsJson = {
                 "copyAll": "скопировать все",
                 "proxy": "прокси",
                 "tutorial": "руководство",
-                "download": "скачать"
+                "download": "скачать",
+                "support": "Поддержка телеграмм",
+                "import": "Импортировать в приложение",
+                "autoImport": "Автоматический импорт"
             }
         };
         let settings = {
@@ -222,7 +258,8 @@ let appsJson = {
             //"proxy": "tg://socks?server=127.0.0.1&port=2085" // opens telegram directly
             //"proxy": "https://t.me/socks?server=127.0.0.1&port=2085"  // opens telegram in browser
         };
-
+        settings.autoImportUserLink = getUserOSLink();
+        
         document.addEventListener( 'alpine:init', () =>
         {
             darkMode = localStorage.getItem( "dark" ) ?? settings.darkMode;
@@ -239,6 +276,17 @@ let appsJson = {
             if ( locale === "fa" ) $( document.body ).addClass( "font-[Vazirmatn]" );
             else $( document.body ).removeClass( "font-[Vazirmatn]" );
         } );
+        
+        function getUserOSLink ()
+        {
+            var platform = navigator.platform.toLowerCase();
+
+            if ( platform.indexOf( 'win' ) !== -1 ) return appsJson.Windows.v2rayN.autoImport;
+            else if ( platform.indexOf( 'iphone' ) !== -1 || platform.indexOf( 'ipad' ) !== -1 || platform.indexOf( 'ipod' ) !== -1 || platform.indexOf( 'mac' ) !== -1 ) return appsJson.IOS.V2Box;
+            else if ( platform.indexOf( 'android' ) !== -1 || platform.indexOf( 'linux arm' ) !== -1 ) return appsJson.Android.v2rayNG.autoImport;
+            else return '';
+        }
+        
     </script>
 </head>
 <body :class="settings.darkMode == 1 ? 'dark' : ''" x-data>
@@ -262,10 +310,8 @@ let appsJson = {
                     <div class="basis-2/3 flex flex-row items-center sm:ltr:pl-9 sm:rtl:pr-9">
                         <div class="data-usage w-full" x-data="progressBar" x-init="Alpine.data( 'progressBar', () => progressBar )">
                             <div class="dark:text-white text-black text-center"><span class="font-bold" x-text="$t('dataUsage')"></span><span dir="ltr"><?php echo bytesformat($user['used_traffic']).' / '. (empty($user['data_limit']) ? '∞' : bytesformat($user['data_limit'])); ?></span></div>
-                            <div class="bg-gray-200 dark:bg-gray-900 rounded-full h-6 mt-5 drop-shadow-lg overflow-hidden" role="progressbar" :aria-valuenow="width" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar rounded-full w-full h-6 text-center dark:text-white text-black text-sm transition leading-6" :class="color" :style="`width: ${width}%; transition: width 2s;`">
-                                    <span class="absolute w-full left-0" x-text="`${width}%`"></span>
-                                </div>
+                            <div class="bg-gray-200 dark:bg-gray-900 rounded-full h-6 mt-5 drop-shadow-lg" role="progressbar" :aria-valuenow="width" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar rounded-full h-6 text-center dark:text-white text-black text-sm transition leading-6" :class="color" :style="`width: ${width}%; transition: width 2s;`" x-text="`${width}%`"></div>
                             </div>
                             <div class="dark:text-white text-black mt-10 text-center"><span class="font-bold" x-text="$t('expirationDate')"></span><span dir="ltr" x-data="{expireDate: ''}" x-init="Alpine.data( 'expireDate', expireDate = '<?=$expireDateVar?>' )" x-text="expireDate"></span></div><!--2023/06/31 10:43:59-->
                             <div class="dark:text-white text-black mt-3 text-sm text-center" x-text="resetInterval == 'year' ? $t('resetIntervalYear') : resetInterval == 'month' ? $t('resetIntervalMonth') : resetInterval == 'week' ? $t('resetIntervalWeek') : resetInterval == 'day' ? $t('resetIntervalDay') : ''"></div>
@@ -313,7 +359,7 @@ let appsJson = {
                                 <button class="inline-block p-4 border-b-2 rounded-t-lg w-full transition" id="profile-tab" data-tabs-target="#links" type="button" role="tab" aria-controls="links" aria-selected="false" x-text="$t('links')"></button>
                             </li>
                             <li class="flex-1" role="presentation">
-                                <button class="inline-block w-full p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 transition" id="apps-tab" data-tabs-target="#apps" type="button" role="tab" aria-controls="apps" aria-selected="false" x-text="$t('apps')"></button>
+                                <button class="inline-block w-full p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 transition" id="apps-tab" data-tabs-target="#apps" type="button" role="tab" aria-controls="apps" aria-selected="false" x-text="$t('apps')"></button>
                             </li>
                         </ul>
                     </div>
@@ -366,7 +412,7 @@ let appsJson = {
                             <div class="flex sm:flex-row flex-col">
                                 <div class="sm:basis-1/5 sm:rtl:ml-4 sm:ltr:mr-4">
                                     <ul class="flex sm:flex-col text-sm font-medium text-center" id="apps-tab" data-tabs-toggle="#apps-tabs-content" role="tablist">
-                                        <template x-for="item in Object.keys(appsJson).reverse()">
+                                        <template x-for="item in Object.keys(appsJson)">
                                             <li class="flex-grow mb-2" role="presentation">
                                                 <button class="inline-block p-4 border-b-2 rounded-t-lg w-full transition" :id="item + '-tab'" :data-tabs-target="'#' + item" type="button" role="tab" :aria-controls="item" aria-selected="false" x-text="item"></button>
                                             </li>
@@ -374,10 +420,11 @@ let appsJson = {
                                     </ul>
                                 </div>
                                 <div id="apps-tabs-content" class="sm:basis-4/5">
+                                    
                                     <template x-for="item in Object.keys(appsJson)">
                                         <div class="hidden" :id="item" role="tabpanel" :aria-labelledby="item + '-tab'">
                                             <ul class="list-none p-0 m-0">
-                                                <template x-for="app in Object.keys(appsJson[item])">
+                                                <template x-for="app in Object.keys(appsJson[item]).reverse()">
                                                     <template x-for="subApp in appsJson[item][app].url">
                                                         <li :class="subApp.best ? 'bg-green-600/30 shadow-lg' : 'hover:bg-black/10 hover:shadow-lg'" class="flex px-3 mb-1 justify-between leading-[3.5rem] rounded-md transition duration-300" x-data="{link: subApp.url}">
                                                             <div class="flex flex-row items-center space-x-3 rtl:space-x-reverse cursor-default">
@@ -385,9 +432,21 @@ let appsJson = {
                                                                 <span :class="subApp.best ? 'dark:text-gray-200 text-gray-800' : 'text-gray-600'" class="text-sm" x-text="subApp.name"></span>
                                                             </div>
                                                             <div class="flex justify-between items-center">
-                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer video-button" :data-tooltip-target="'tooltip-tutorial-' + app" :data-link="appsJson[item][app].tutorial" :data-title="app">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="stroke-blue-600 dark:hover:stroke-gray-300 hover:stroke-gray-800 transition-colors" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer" x-show="appsJson[item][app].autoImport != ''" :data-tooltip-target="'tooltip-import-' + app" :href="appsJson[item][app].autoImport + '{{ user.subscription_url }}'" :data-title="app">
+                                                                    <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stroke-blue-600 dark:hover:stroke-gray-300 hover:stroke-gray-800 transition-colors">
+                                                                        <polyline id="primary" points="13 7 13 13 7 13" style="fill: none; "></polyline>
+                                                                        <line id="primary-2" data-name="primary" x1="13" y1="13" x2="3" y2="3" style="fill: none; "></line>
+                                                                        <path id="primary-3" data-name="primary" d="M13,3h7a1,1,0,0,1,1,1V20a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V13" style="fill: none; "></path>
+                                                                    </svg>
+                                                                </a>
+                                                                <div :id="'tooltip-import-' + app" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                                                    <span x-text="$t('import')"></span>
+                                                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                                                </div>
+                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer video-button" x-show="appsJson[item][app].tutorial != ''" :data-tooltip-target="'tooltip-tutorial-' + app" :data-link="appsJson[item][app].tutorial" :data-title="app">
+                                                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stroke-blue-600 dark:hover:stroke-gray-300 hover:stroke-gray-800 transition-colors">
+                                                                        <polygon points="23 7 16 12 23 17 23 7" />
+                                                                        <rect height="14" rx="2" ry="2" width="15" x="1" y="5" />
                                                                     </svg>
                                                                 </a>
                                                                 <div :id="'tooltip-tutorial-' + app" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -425,6 +484,7 @@ let appsJson = {
         <div class="content rounded-lg"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+
     <script>
 
         let progressBar = {
