@@ -1,14 +1,11 @@
 <?php
 
-if ((isset($_SERVER['HTTP_USER_AGENT']) and empty($_SERVER['HTTP_USER_AGENT'])) or !isset($_SERVER['HTTP_USER_AGENT'])){
-    header('Location: /');
-    exit();
-}
 
 if (!function_exists('str_contains')) die('Please upgrade your PHP version to 8 or above');
 $isTextHTML=str_contains(($_SERVER['HTTP_ACCEPT']??''),'text/html');
 
 const BASE_URL="https://YOUR_IP:PORT"; // Replace IP address and port
+
 
 $URL=BASE_URL.$_SERVER['SCRIPT_URL']??'';
 $URL .= $isTextHTML?'/info':'';
@@ -26,7 +23,6 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $response = curl_exec($ch);
 if (curl_error($ch)) die('Error !'.__LINE__.'<br>Please check <a href="https://github.com/AC-Lover/AC-Subcription/wiki/Error-!27">this</a>');
 curl_close($ch);
-
 
 $header_text = substr($response, 0, strpos($response, "\r\n\r\n"));
 $response=trim(str_replace($header_text,'',$response));
