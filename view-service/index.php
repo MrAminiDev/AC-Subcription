@@ -140,28 +140,53 @@ let appsJson = {
                         }
                     ],
                     "tutorial": ""
-                }
+                },
+                "HiddifyNext": {
+                    "url": [
+                        {
+                            "name": "",
+                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v1.0.0/Hiddify-Android-universal.apk",
+                            "best": false,
+                        },
+                    ],
+                    "tutorial": "../marzban-tutorial/hiddify.mp4",
+                    "autoImport": "",
+                },
+            }
             },
             "Windows": {
+                "SingBox": {
+                    "url": [
+                        {
+                            "name": "",
+                            "url": "https://github.com/SagerNet/sing-box/releases/download/v1.9.0-rc.3/sing-box-1.9.0-rc.3-windows-amd64.zip",
+                            "best": false,
+                        },
+                    ],
+                    "tutorial": "",
+                    "autoImport": "",
+                },
                 "nekoray": {
                     "url": [
                         {
                             "name": "",
-                            "url": "https://github.com/MatsuriDayo/nekoray/releases/download/3.8/nekoray-3.8-2023-06-14-windows64.zip",
+                            "url": "https://github.com/MatsuriDayo/nekoray/releases/download/3.26/nekoray-3.26-2023-12-09-windows64.zip",
                             "best": true
                         }
                     ],
                     "tutorial": "../marzban-tutorial/nekoray.MP4"
+                    "autoImport": ""
                 },
                 "v2rayN": {
                     "url": [
                         {
                             "name": "",
-                            "url": "https://github.com/2dust/v2rayN/releases/download/6.27/zz_v2rayN-With-Core-SelfContained.7z",
+                            "url": "https://github.com/2dust/v2rayN/releases/download/6.60/zz_v2rayN-With-Core-SelfContained.7z",
                             "best": false
                         }
                     ],
                     "tutorial": "../marzban-tutorial/v2rayN.MP4"
+                    "autoImport": "",
                 }
             }
         };
