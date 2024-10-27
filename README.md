@@ -46,13 +46,13 @@ Follow the instructions below to get started
 
 ### Prerequisites
 
-Web host from: [www.bestla.net](https://www.bestla.net/portal/aff.php?aff=263)<br>
+Web host from: [www.bestla.net](https://www.bestla.net/)<br>
 Domain<br>
 PHP 8.0+
 
 ### Installation
 
-1. Download the latest version of the [releases](https://github.com/AC-Lover/AC-Subcription/releases/latest)
+1. Download the latest version of the [releases](https://github.com/MrAminiDev/AC-Subcription/releases/latest)
 2. Upload to your web host
 3. Unzip the zip file
 4. Edit the file `index.php` in the path `/sub/index.php` and replace the IP address and port of your border panel in `BASE_URL` line <a href="https://github.com/AC-Lover/AC-Subcription/blob/b8f02880524fdc29894653c4b4f2b703caee0ae5/sub/index.php#L9">9</a><br>
@@ -103,7 +103,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/AC-Lover/AC-
 
 * [Gozargah](https://github.com/Gozargah/Marzban)
 * [Muhammad Ashouri](https://github.com/MuhammadAshouri)
-
-  
-<h1 align="left">Donation</h1>
-<p align="left">https://nowpayments.io/donation/ACLover</p>
