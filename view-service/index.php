@@ -145,6 +145,7 @@ let appsJson = {
                             "best": true,
                         },
                     ],
+                    "autoImport": "hiddify://import/"
                 },
             },
             "Windows": {
@@ -157,6 +158,7 @@ let appsJson = {
                         },
                     ],
                     "tutorial": "<?=$tutorialPath?>/marzban-tutorial/hiddify.mp4",
+                    "autoImport": "hiddify://import/"
                 },
                 "SingBox": {
                     "url": [
