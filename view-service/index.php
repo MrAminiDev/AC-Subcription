@@ -119,7 +119,7 @@ let appsJson = {
                         },
                         {
                             "name": "Github",
-                            "url": "https://github.com/2dust/v2rayNG/releases/download/1.8.5/v2rayNG_1.8.5.apk",
+                            "url": "https://github.com/2dust/v2rayNG/releases/download/1.9.8/v2rayNG_1.9.8_universal.apk",
                             "best": false
                         }
                     ],
@@ -139,22 +139,33 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": ""
+                    "tutorial": "",
+                    "autoImport": ""
                 },
-                "HiddifyNext": {
+                "Hiddify": {
                     "url": [
                         {
                             "name": "",
-                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v1.0.0/Hiddify-Android-universal.apk",
-                            "best": false,
+                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Windows-Setup-x64.exe",
+                            "best": true,
+                        },
+                    ],
+                    "tutorial": "",
+                    "autoImport": "",
+                },
+            },
+            "Windows": {
+                "Hiddify": {
+                    "url": [
+                        {
+                            "name": "",
+                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Android-universal.apk",
+                            "best": true,
                         },
                     ],
                     "tutorial": "../marzban-tutorial/hiddify.mp4",
                     "autoImport": "",
                 },
-            }
-            },
-            "Windows": {
                 "SingBox": {
                     "url": [
                         {
@@ -164,29 +175,27 @@ let appsJson = {
                         },
                     ],
                     "tutorial": "",
-                    "autoImport": "",
+                    "autoImport": "sing-box://import-remote-profile?url="
                 },
                 "nekoray": {
                     "url": [
                         {
                             "name": "",
-                            "url": "https://github.com/MatsuriDayo/nekoray/releases/download/3.26/nekoray-3.26-2023-12-09-windows64.zip",
+                            "url": "https://github.com/MatsuriDayo/nekoray/releases/download/3.8/nekoray-3.8-2023-06-14-windows64.zip",
                             "best": true
                         }
                     ],
                     "tutorial": "../marzban-tutorial/nekoray.MP4"
-                    "autoImport": ""
                 },
                 "v2rayN": {
                     "url": [
                         {
                             "name": "",
-                            "url": "https://github.com/2dust/v2rayN/releases/download/6.60/zz_v2rayN-With-Core-SelfContained.7z",
+                            "url": "https://github.com/2dust/v2rayN/releases/download/6.27/zz_v2rayN-With-Core-SelfContained.7z",
                             "best": false
                         }
                     ],
                     "tutorial": "../marzban-tutorial/v2rayN.MP4"
-                    "autoImport": "",
                 }
             }
         };
