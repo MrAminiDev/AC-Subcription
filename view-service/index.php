@@ -16,6 +16,7 @@ function bytesformat($bytes, $precision = 2): string
 
     return round($bytes, $precision) . ' ' . $units[$pow];
 }
+    $tutorialPath = dirname(__DIR__);
 
 ?>
 
@@ -50,7 +51,6 @@ let appsJson = {
                             "best": false,
                         },
                     ],
-                    "tutorial": "",
                     "autoImport": "sing-box://import-remote-profile?url="
                 },
                 "Streisand": {
@@ -61,7 +61,7 @@ let appsJson = {
                             "best": true
                         }
                     ],
-                    "tutorial": ".../marzban-tutorial/streisand.MP4",
+                    "tutorial": "<?=$tutorialPath?>/marzban-tutorial/streisand.MP4",
                     "autoImport": "streisand://install-config?url="
                 },
                 "FoXray": {
@@ -72,7 +72,7 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": "../marzban-tutorial/foxray.mp4",
+                    "tutorial": "<?=$tutorialPath?>/marzban-tutorial/foxray.mp4",
                     "autoImport": "foxray://install-config?url="
                 },
                 "V2Box": {
@@ -83,7 +83,6 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": "",
                     "autoImport": "v2box://install-config?url="
                 },
                 "Shadowrocket": {
@@ -94,8 +93,7 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": "../marzban-tutorial/v2box.MP4",
-                    "autoImport":""
+                    "tutorial": "<?=$tutorialPath?>/marzban-tutorial/v2box.MP4",
                 }
             },
             "Android": {
@@ -107,7 +105,6 @@ let appsJson = {
                             "best": true,
                         }
                     ],
-                    "tutorial": "",
                     "autoImport": "sing-box://import-remote-profile?url="
                 },
                 "v2rayNG": {
@@ -123,48 +120,45 @@ let appsJson = {
                             "best": false
                         }
                     ],
-                    "tutorial": "../marzban-tutorial/v2rayNG.mp4",
+                    "tutorial": "<?=$tutorialPath?>/marzban-tutorial/v2rayNG.mp4",
                     "autoImport": "v2rayng://install-config?url="
                 },
                 "NekoBox": {
                     "url": [
                         {
-                            "name": "Arm64",
+                            "name": "arm64-v8a",
                             "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.1.4/NB4A-1.1.4-arm64-v8a.apk",
                             "best": false
                         },
                         {
-                            "name": "Armeabi",
+                            "name": "armeabi-v7a",
                             "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.1.4/NB4A-1.1.4-armeabi-v7a.apk",
                             "best": false
                         }
                     ],
-                    "tutorial": "",
-                    "autoImport": ""
                 },
                 "Hiddify": {
                     "url": [
                         {
-                            "name": "",
-                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Windows-Setup-x64.exe",
+                            "name": "Universal",
+                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Android-universal.apk",
                             "best": true,
                         },
                     ],
-                    "tutorial": "",
-                    "autoImport": "",
+                    "autoImport": "hiddify://import/"
                 },
             },
             "Windows": {
                 "Hiddify": {
                     "url": [
                         {
-                            "name": "",
-                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Android-universal.apk",
+                            "name": "win-x64",
+                            "url": "https://github.com/hiddify/hiddify-next/releases/download/v2.0.5/Hiddify-Windows-Setup-x64.exe",
                             "best": true,
                         },
                     ],
-                    "tutorial": "../marzban-tutorial/hiddify.mp4",
-                    "autoImport": "",
+                    "tutorial": "<?=$tutorialPath?>/marzban-tutorial/hiddify.mp4",
+                    "autoImport": "hiddify://import/"
                 },
                 "SingBox": {
                     "url": [
@@ -174,28 +168,27 @@ let appsJson = {
                             "best": false,
                         },
                     ],
-                    "tutorial": "",
                     "autoImport": "sing-box://import-remote-profile?url="
                 },
-                "nekoray": {
+                "Nekoray": {
                     "url": [
                         {
-                            "name": "",
+                            "name": "win-x64",
                             "url": "https://github.com/MatsuriDayo/nekoray/releases/download/3.8/nekoray-3.8-2023-06-14-windows64.zip",
                             "best": true
                         }
                     ],
-                    "tutorial": "../marzban-tutorial/nekoray.MP4"
+                    "tutorial": "<?=$tutorialPath?>/marzban-tutorial/nekoray.MP4"
                 },
                 "v2rayN": {
                     "url": [
                         {
-                            "name": "",
+                            "name": "With-Core-SelfContained",
                             "url": "https://github.com/2dust/v2rayN/releases/download/6.27/zz_v2rayN-With-Core-SelfContained.7z",
                             "best": false
                         }
                     ],
-                    "tutorial": "../marzban-tutorial/v2rayN.MP4"
+                    "tutorial": "<?=$tutorialPath?>/marzban-tutorial/v2rayN.MP4"
                 }
             }
         };
@@ -461,13 +454,13 @@ let appsJson = {
                                             <ul class="list-none p-0 m-0">
                                                 <template x-for="app in Object.keys(appsJson[item]).reverse()">
                                                     <template x-for="subApp in appsJson[item][app].url">
-                                                        <li :class="subApp.best ? 'bg-green-600/30 shadow-lg' : 'hover:bg-black/10 hover:shadow-lg'" class="flex px-3 mb-1 justify-between leading-[3.5rem] rounded-md transition duration-300" x-data="{link: subApp.url}">
+                                                        <li :class="subApp.best ? 'bg-blue-600/30 border-blue shadow-lg' : 'hover:bg-black/10 hover:shadow-lg'" class="flex px-3 mb-1 justify-between leading-[3.5rem] rounded-md transition duration-300" x-data="{link: subApp.url}">
                                                             <div class="flex flex-row items-center space-x-3 rtl:space-x-reverse cursor-default">
                                                                 <span class="font-semibold flex-1 dark:text-gray-200 text-black" x-text="app"></span>
                                                                 <span :class="subApp.best ? 'dark:text-gray-200 text-gray-800' : 'text-gray-600'" class="text-sm" x-text="subApp.name"></span>
                                                             </div>
                                                             <div class="flex justify-between items-center">
-                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer" x-show="appsJson[item][app].autoImport != ''" :data-tooltip-target="'tooltip-import-' + app" :href="appsJson[item][app].autoImport + '<?=$user['subscription_url']?>'" :data-title="app">
+                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer" x-show="appsJson[item][app].autoImport !== undefined && appsJson[item][app].autoImport != ''" :data-tooltip-target="'tooltip-import-' + app" :href="appsJson[item][app].autoImport + '<?=$user['subscription_url']?>'" :data-title="app">
                                                                     <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stroke-blue-600 dark:hover:stroke-gray-300 hover:stroke-gray-800 transition-colors">
                                                                         <polyline id="primary" points="13 7 13 13 7 13" style="fill: none; "></polyline>
                                                                         <line id="primary-2" data-name="primary" x1="13" y1="13" x2="3" y2="3" style="fill: none; "></line>
@@ -478,7 +471,7 @@ let appsJson = {
                                                                     <span x-text="$t('import')"></span>
                                                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                                                 </div>
-                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer video-button" x-show="appsJson[item][app].tutorial != ''" :data-tooltip-target="'tooltip-tutorial-' + app" :data-link="appsJson[item][app].tutorial" :data-title="app">
+                                                                <a class="w-8 h-8 ltr:mr-3 rtl:ml-3 cursor-pointer video-button" x-show="appsJson[item][app].autoImport !== undefined && appsJson[item][app].tutorial != ''" :data-tooltip-target="'tooltip-tutorial-' + app" :data-link="appsJson[item][app].tutorial" :data-title="app">
                                                                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stroke-blue-600 dark:hover:stroke-gray-300 hover:stroke-gray-800 transition-colors">
                                                                         <polygon points="23 7 16 12 23 17 23 7" />
                                                                         <rect height="14" rx="2" ry="2" width="15" x="1" y="5" />
